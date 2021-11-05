@@ -61,8 +61,11 @@ function App() {
             <MovieDetailsPage />
           </Route>
           <Route>
-            <Redirect exact to="/" />
+            <p>not found</p>
           </Route>
+          {/* <Route>
+            <Redirect exact to="/" />
+          </Route> */}
         </Switch>
       </Suspense>
     </div>

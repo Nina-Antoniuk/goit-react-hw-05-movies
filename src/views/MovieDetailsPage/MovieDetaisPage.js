@@ -85,44 +85,46 @@ function MovieDetailsPage() {
             <p>Date of relise: {film.release_date}</p>
           </div>
         </div>
-        <Router>
-          <ul className={s.list}>
-            <li>
-              <NavLink
-                className={s.link}
-                activeClassName={s.activeLink}
-                to={`${url}/casts`}
-              >
-                Casts
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                className={s.link}
-                activeClassName={s.activeLink}
-                to={`${url}/reviews`}
-              >
-                Reviews
-              </NavLink>
-            </li>
-          </ul>
-          <Suspense
-            fallback={
-              <div className="Loader">
-                <Loader type="Grid" color="#8d6675" height={200} width={200} />
-              </div>
-            }
-          >
-            <Switch>
-              <Route path={`${url}/casts`}>
-                <Casts id={params.moviesId} />
-              </Route>
-              <Route path={`${url}/reviews`}>
-                <Reviews id={params.moviesId} />
-              </Route>
-            </Switch>
-          </Suspense>
-        </Router>
+        {/* <Router> */}
+        <ul className={s.list}>
+          <li>
+            <NavLink
+              exact
+              className={s.link}
+              activeClassName={s.activeLink}
+              to={`${url}/casts`}
+            >
+              Casts
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              exact
+              className={s.link}
+              activeClassName={s.activeLink}
+              to={`${url}/reviews`}
+            >
+              Reviews
+            </NavLink>
+          </li>
+        </ul>
+        <Suspense
+          fallback={
+            <div className="Loader">
+              <Loader type="Grid" color="#8d6675" height={200} width={200} />
+            </div>
+          }
+        >
+          <Switch>
+            <Route exact path={`${url}/casts`}>
+              <Casts id={params.moviesId} />
+            </Route>
+            <Route exact path={`${url}/reviews`}>
+              <Reviews id={params.moviesId} />
+            </Route>
+          </Switch>
+        </Suspense>
+        {/* </Router> */}
       </div>
     );
   }
