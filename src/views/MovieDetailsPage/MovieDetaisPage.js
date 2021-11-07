@@ -1,6 +1,5 @@
 import { useState, useEffect, lazy, Suspense } from 'react';
 import {
-  BrowserRouter as Router,
   NavLink,
   Route,
   Switch,
@@ -29,7 +28,7 @@ function MovieDetailsPage() {
 
   useEffect(() => {
     setState('pending');
-    fetchMovieById(params.moviesId)
+    fetchMovieById(params.id)
       .then(data => {
         setFilm(data);
         setState('resolved');
@@ -37,7 +36,7 @@ function MovieDetailsPage() {
       .catch(err => {
         setState('rejected');
       });
-  }, [params.moviesId]);
+  }, [params.id]);
 
   const handleClick = () => {
     history.push(location?.state?.from?.location?.pathname ?? '/');
@@ -87,7 +86,6 @@ function MovieDetailsPage() {
             <p>Date of relise: {film.release_date}</p>
           </div>
         </div>
-        {/* <Router> */}
         <ul className={s.list}>
           <li>
             <NavLink
@@ -118,15 +116,16 @@ function MovieDetailsPage() {
           }
         >
           <Switch>
-            <Route exact path={`${path}/casts`}>
-              <Casts id={params.moviesId} />
+            {/* <Route path={`${path}/reviews`} exact component={Reviews} /> */}
+            {/* <Route path={`${path}/casts`} exact component={Casts} /> */}
+            <Route path={`${path}/casts`} exact>
+              <Casts id={params.id} />
             </Route>
-            <Route exact path={`${path}/reviews`}>
-              <Reviews id={params.moviesId} />
+            <Route path={`${path}/reviews`} exact>
+              <Reviews id={params.id} />
             </Route>
           </Switch>
         </Suspense>
-        {/* </Router> */}
       </div>
     );
   }
