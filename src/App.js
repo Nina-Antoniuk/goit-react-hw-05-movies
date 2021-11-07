@@ -51,21 +51,12 @@ function App() {
         }
       >
         <Switch>
-          <Route exact path="/">
-            <HomePage />
-          </Route>
-          <Route exact path="/movies">
-            <MoviesPage />
-          </Route>
-          <Route exact path="/movies/:moviesId">
-            <MovieDetailsPage />
-          </Route>
+          <Route path="/" exact component={HomePage} />
+          <Route path="/movies" exact component={MoviesPage} />
+          <Route path="/movies/:id" component={MovieDetailsPage} />
           <Route>
-            <p>not found</p>
-          </Route>
-          {/* <Route>
             <Redirect exact to="/" />
-          </Route> */}
+          </Route>
         </Switch>
       </Suspense>
     </div>
