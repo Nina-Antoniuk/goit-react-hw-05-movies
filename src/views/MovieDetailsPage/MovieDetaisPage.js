@@ -25,7 +25,7 @@ function MovieDetailsPage() {
   const location = useLocation();
   const history = useHistory();
   const params = useParams();
-  const { url } = useRouteMatch();
+  const { path, url } = useRouteMatch();
 
   useEffect(() => {
     setState('pending');
@@ -72,9 +72,11 @@ function MovieDetailsPage() {
         <div className={s.movieInfo}>
           <div className={s.image}>
             <img
+              class={s.img}
               src={
-                film.poster_path ??
-                'https://dummyimage.com/200x250/2a2a2a/ffffff&text=Movie+image+placeholder'
+                film.poster_path
+                  ? `https://image.tmdb.org/t/p/w500//${film.poster_path}`
+                  : 'https://dummyimage.com/200x250/2a2a2a/ffffff&text=Movie+image+placeholder'
               }
               alt={film.tagline}
             />
@@ -116,10 +118,10 @@ function MovieDetailsPage() {
           }
         >
           <Switch>
-            <Route exact path={`${url}/casts`}>
+            <Route exact path={`${path}/casts`}>
               <Casts id={params.moviesId} />
             </Route>
-            <Route exact path={`${url}/reviews`}>
+            <Route exact path={`${path}/reviews`}>
               <Reviews id={params.moviesId} />
             </Route>
           </Switch>
